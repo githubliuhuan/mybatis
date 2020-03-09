@@ -9,7 +9,9 @@ public class Employee {
     private Integer id;
     private String name;
     private Date hireDate;
-    private Integer deptId;
+    //private Integer deptId;
+    private Dept dept;
+    private Float salary;
 
     @Override
     public String toString() {
@@ -17,7 +19,7 @@ public class Employee {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", hireDate=" + hireDate +
-                ", deptId=" + deptId +
+                ", dept=" + dept +
                 ", salary=" + salary +
                 '}';
     }
@@ -30,7 +32,6 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    private Float salary;
 
     public Integer getId() {
         return id;
@@ -49,13 +50,13 @@ public class Employee {
     }
 
 
-    public Integer getDeptId() {
+/*    public Integer getDeptId() {
         return deptId;
     }
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
-    }
+    }*/
 
     public Float getSalary() {
         return salary;
@@ -63,5 +64,13 @@ public class Employee {
 
     public void setSalary(Float salary) {
         this.salary = salary;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 }

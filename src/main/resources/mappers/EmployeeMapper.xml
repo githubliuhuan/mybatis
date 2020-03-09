@@ -15,11 +15,34 @@
     <resultMap id="empMap" type="Employee">
         <id property="id" column="ID"/>
         <result property="hireDate" column="hire_date"/>
-        <result property="deptId" column="dept_id"/>
+        <!--<result property="deptId" column="dept_id"/>-->
+        <!--n+1条查询语句。n有多少个员工-->
+        <association property="dept" select="DEPT.getDeptById" column="DEPT_ID"/>
     </resultMap>
 
     <select id="getEmpList" resultMap="empMap">
         select id,name,salary,hire_date,dept_id
         from employee
     </select>
+    
+    <resultMap id="empDeptMap" type="Employeee">
+        <id property="id" column="ID"/>
+        <result property="hireDate" column="HIRE_DATE"/>
+        <result property="salary" column="SALARY"/>
+        <result property="name" column="NAME"/>
+<!--        <result property="dept.id" column="DEPT_ID"/>
+        <result property="dept.name" column="deptName"/>-->
+<!--        <association property="dept" javaType="Dept">
+            <result column="DEPT_ID" property="id"/>
+            <result column="deptName" property="name"/>
+        </association>-->
+        <association property="dept" resultMap="DEPT.deptMap"/>
+    </resultMap>
+    
+    <select id="getEmpWithDept" resultMap="empDeptMap">
+        select e.id,e.name,e.salary,e.hire_date,e.dept_id,d.name as deptName
+        from employee e
+        inner join dept d on e.dept_id=d.id
+    </select>
+    
 </mapper>

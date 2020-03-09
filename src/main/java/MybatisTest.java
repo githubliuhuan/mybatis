@@ -9,7 +9,6 @@ import pojo.Dept;
 import pojo.Employee;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +62,7 @@ public class MybatisTest {
             Employee emp = new Employee();
             emp.setName("张三");
             emp.setHireDate(new Date());
-            emp.setDeptId(1);
+            //emp.setDeptId(1);
             emp.setSalary(10000F);
             session.insert("EMPLOYEE.addEmp",emp);
             System.out.println(emp.getId());
@@ -84,7 +83,7 @@ public class MybatisTest {
             Employee emp = new Employee();
             emp.setName("李四");
             emp.setHireDate(new Date());
-            emp.setDeptId(2);
+            //emp.setDeptId(2);
             emp.setSalary(25000F);
             emp.setId(1);
             session.update("EMPLOYEE.updateEmployee",emp);
@@ -115,6 +114,20 @@ public class MybatisTest {
         List<Employee> emps = session.selectList("EMPLOYEE.getEmpList");
         for(Employee emp: emps){
             System.out.println(emp);
+        }
+    }
+
+    @Test
+    public void getDeptWithEmp(){
+        List<Dept> deptList = session.selectList("DEPT.getDeptWithEmp");
+        for (Dept dept : deptList) {
+            System.out.println(dept.getName());
+            if(dept.getEmps() != null){
+                for (Employee employee : dept.getEmps()) {
+                    System.out.println(employee);
+                }
+                System.out.println("==========================");
+            }
         }
     }
 }

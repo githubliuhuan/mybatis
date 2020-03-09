@@ -35,4 +35,26 @@
     <select id="getDeptList" resultMap="deptMap">
         select id,name as deptName from dept
     </select>
+
+    <select id="getDeptById" parameterType="int" resultType="Dept">
+        select id,name from dept where id = #{id}
+    </select>
+    
+    <resultMap id="deptEmpMap" type="Dept">
+        <!--主键用id标签-->
+        <id property="id" column="ID"/>
+        <!--property是实体类中的属性名，column是结果集中的列名-->
+        <result property="name" column="name"/>
+        <collection property="emps" ofType="Employee">
+            <id column="eid" property="id"/>
+            <result column="ename" property="name"/>
+            <result column="salary" property="salary"/>
+        </collection>
+    </resultMap>
+    
+    <select id="getDeptWithEmp" resultMap="deptEmpMap">
+        select d.id,d.name,e.id as eid,e.name as ename,e.salary
+        from dept d
+        left join employee e on e.dept_id = d.id
+    </select>
 </mapper>
