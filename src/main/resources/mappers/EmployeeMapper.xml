@@ -25,7 +25,7 @@
         from employee
     </select>
     
-    <resultMap id="empDeptMap" type="Employeee">
+    <resultMap id="empDeptMap" type="Employee">
         <id property="id" column="ID"/>
         <result property="hireDate" column="HIRE_DATE"/>
         <result property="salary" column="SALARY"/>
